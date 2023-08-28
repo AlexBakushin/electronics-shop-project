@@ -1,4 +1,10 @@
 from src.item import Item
+from src.phone import Phone
+
+
+def test___init__():
+    item1 = Item('test', 100, 10)
+    assert str(item1) == 'test'
 
 
 def test_calculate_total_price():
@@ -30,9 +36,16 @@ def test_string_to_number():
 
 def test___repr__():
     item1 = Item("Наушники", 2000, 50)
-    assert repr(item1) == "Item('Наушники', '2000', 50)"
+    assert repr(item1) == "Item('Наушники', 2000, 50)"
 
 
 def test___str__():
     item1 = Item("Наушники", 2000, 50)
     assert str(item1) == 'Наушники'
+
+
+def test___add__():
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    item1 = Item("Смартфон", 10000, 20)
+    assert item1 + phone1 == 25
+    assert phone1 + phone1 == 10
