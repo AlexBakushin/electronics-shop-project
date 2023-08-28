@@ -5,7 +5,7 @@ class Item:
     """
     Класс для представления товара в магазине.
     """
-    pay_rate = 1.0
+    pay_rate = 1.0  # Коэффицент скидки
     all = []
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
@@ -22,12 +22,23 @@ class Item:
         Item.all.append(self)
 
     def __repr__(self):
+        """
+        :return: Class(name, price, quantity)
+        """
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
     def __str__(self):
+        """
+        :return: name
+        """
         return f"{self.__name}"
 
     def __add__(self, other):
+        """
+        Складывание колличества товаров одного или нескольких классов
+        :param other: количество товара того же или другого класса
+        :return: общая сумма или предварительная ошибка
+        """
         if not isinstance(other, Item):
             raise ValueError('Складывать можно только объекты Item и дочерние от него')
         return self.quantity + other.quantity
@@ -60,6 +71,10 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
+        """
+        Метод класса для открытия файла
+        :return:
+        """
         cls.all = []
         with open('/home/alex/PycharmProjects/electronics-shop-project /electronics-shop-project/src/items.csv',
                   'r') as file:
@@ -69,4 +84,9 @@ class Item:
 
     @staticmethod
     def string_to_number(str_num):
+        """
+        Статический метод для перевода строки в цыфру
+        :param str_num: строка
+        :return: цыфра
+        """
         return int(float(str_num))
