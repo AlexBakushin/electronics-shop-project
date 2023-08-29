@@ -49,13 +49,18 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        return self.price * self.quantity
+        result = self.price * self.quantity
+        if result < 0:
+            raise ValueError('Количество товара не может быть отрицательным.')
+        return result
 
     def apply_discount(self):
         """
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= Item.pay_rate
+        if Item.pay_rate < 0:
+            raise ValueError('Скидка не может быть отрицательной.')
         return self.price
 
     @property

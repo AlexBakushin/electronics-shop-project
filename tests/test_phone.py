@@ -1,4 +1,5 @@
 from src.phone import Phone
+import pytest
 
 
 def test___init__():
@@ -8,6 +9,16 @@ def test___init__():
     """
     phone1 = Phone("iPhone 14", 120_000, 5, 2)
     assert str(phone1) == 'iPhone 14'
+
+
+def test___init____value_error():
+    """
+    Тест инициализации с проверкой ошибки малого количества сим-карт
+    :return:
+    """
+    with pytest.raises(ValueError):
+        phone2 = Phone("iPhone 20", 120_000, 5, 0)
+        str(phone2)
 
 
 def test___repr__():
