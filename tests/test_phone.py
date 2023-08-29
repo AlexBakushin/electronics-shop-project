@@ -13,7 +13,7 @@ def test___init__():
 
 def test_number_of_sim():
     """
-    Тест с проверкой ошибки малого количества сим-карт
+    Тест количества сим-карт
     :return:
     """
     phone1 = Phone("iPhone 10", 20_000, 5, 2)
@@ -22,6 +22,10 @@ def test_number_of_sim():
 
 
 def test_number_of_sim__value_error():
+    """
+    Тест с проверкой ошибки малого или отрицательного количества сим-карт
+    :return:
+    """
     with pytest.raises(ValueError):
         phone2 = Phone("iPhone 20", 120_000, 5, 0)
         phone2.number_of_sim = 0
