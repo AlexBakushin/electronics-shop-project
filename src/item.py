@@ -1,7 +1,8 @@
 import csv
+from abc import ABC
 
 
-class Item:
+class Item(ABC):
     """
     Класс для представления товара в магазине.
     """
@@ -20,6 +21,7 @@ class Item:
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
+        super().__init__()
 
     def __repr__(self):
         """
@@ -65,10 +67,19 @@ class Item:
 
     @property
     def name(self):
+        """
+        геттер имени товара
+        :return: имя
+        """
         return self.__name
 
     @name.setter
     def name(self, __name):
+        """
+        сеттер имени товара (сокращает, если имя длиннее 10 символов)
+        :param __name:
+        :return: имя
+        """
         if len(__name) > 10:
             self.__name = __name[:9]
         else:
