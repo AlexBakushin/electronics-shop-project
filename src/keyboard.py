@@ -24,12 +24,8 @@ class MixinLog:
         Меняет язык клавиатуры (с EN > RU и с RU > EN)
         :return: Смененный язык
         """
-        if self.__language == 'EN':
-            self.__language = 'RU'
-            return self.__language
-        elif self.__language == 'RU':
-            self.__language = 'EN'
-            return self.__language
+        self.__language = ({"RU", "EN"} - {self.__language}).pop()
+        return self
 
 
 class Keyboard(Item, MixinLog):
