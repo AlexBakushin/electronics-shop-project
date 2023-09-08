@@ -2,6 +2,14 @@ import csv
 from abc import ABC
 
 
+class InstantiateCSVError(Exception):
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else 'Файл item.csv поврежден'
+
+    def __str__(self):
+        return self.message
+
+
 class Item(ABC):
     """
     Класс для представления товара в магазине.
@@ -92,11 +100,23 @@ class Item(ABC):
         :return:
         """
         cls.all = []
-        with open('/home/alex/PycharmProjects/electronics-shop-project /electronics-shop-project/src/items.csv',
-                  'r') as file:
-            reader = csv.DictReader(file)
+        try:
+            reader = csv.DictReader(
+                open('/home/alex/PycharmProjects/electronics-shop-project /electronics-shop-project/src/items.csv',
+                     'r'))
             for row in reader:
-                cls(row.get('name'), float(row.get('price')), int(row.get('quantity')))
+                if type(row.get('name')) is str and row.get('name') != '':
+                    if type(row.get('price')) is str and row.get('price') != '':
+                        if type(row.get('quantity')) is str and row.get('quantity') != '':
+                            cls(row.get('name'), float(row.get('price')), int(row.get('quantity')))
+                        else:
+                            raise InstantiateCSVError
+                    else:
+                        raise InstantiateCSVError
+                else:
+                    raise InstantiateCSVError
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
 
     @staticmethod
     def string_to_number(str_num):

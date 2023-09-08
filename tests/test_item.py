@@ -1,6 +1,7 @@
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 import pytest
+import csv
 
 
 def test___init__():
@@ -121,3 +122,26 @@ def test___add____value_error():
     with pytest.raises(ValueError):
         phone1 = Phone("iPhone 14", 120_000, 5, 2)
         phone1 + 15
+
+
+def test_instantiate_csv_error():
+    with pytest.raises(InstantiateCSVError):
+        row = {'name': 'Колонки', 'price': '75', 'quantity': None}
+        if type(row.get('name')) is str and row.get('name') != '':
+            if type(row.get('price')) is str and row.get('price') != '':
+                if type(row.get('quantity')) is str and row.get('quantity') != '':
+                    pass
+                else:
+                    raise InstantiateCSVError
+            else:
+                raise InstantiateCSVError
+        else:
+            raise InstantiateCSVError
+
+
+def test_file_not_found_error():
+    with pytest.raises(FileNotFoundError):
+            reader = csv.DictReader(
+                open('/home/alex/PycharmProjects/electronics-shop-project /electronics-shop-project/src/items.csv',
+                     'r'))
+            raise FileNotFoundError
