@@ -125,6 +125,10 @@ def test___add____value_error():
 
 
 def test_instantiate_csv_error():
+    """
+    Тест для проверки вывода ошибки об целостности csv-файла
+    :return:
+    """
     with pytest.raises(InstantiateCSVError):
         row = {'name': 'Колонки', 'price': '75', 'quantity': None}
         if type(row.get('name')) is str and row.get('name') != '':
@@ -140,6 +144,10 @@ def test_instantiate_csv_error():
 
 
 def test_file_not_found_error():
+    """
+    Тест для проверки вывода ошибки об существовании csv-файла
+    :return:
+    """
     with pytest.raises(FileNotFoundError):
             reader = csv.DictReader(
                 open('/home/alex/PycharmProjects/electronics-shop-project /electronics-shop-project/src/items.csv',

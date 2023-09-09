@@ -96,7 +96,8 @@ class Item(ABC):
     @classmethod
     def instantiate_from_csv(cls):
         """
-        Метод класса для открытия файла
+        Метод класса для открытия файла csv формата
+        с проверкой существования файла и его целостности
         :return:
         """
         cls.all = []
